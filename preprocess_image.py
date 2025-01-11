@@ -63,4 +63,6 @@ filtered_rgb = cv2.medianBlur(rgb_image, 7)
 filtered_ucsb = np.dstack((filtered_rgb, alpha_channel))
 
 final = Image.fromarray(filtered_ucsb)
+new_size = (final.width // 2, final.height // 2)
+final = final.resize(new_size)
 final.save("finalmap.png")
