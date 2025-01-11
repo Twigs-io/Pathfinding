@@ -53,13 +53,16 @@ ucsb_array[~mask] = [0, 0, 0, 255]
 image = Image.fromarray(ucsb_array)
 image.save("bw.png")
 
-rgb_image = ucsb_array[:, :, :3]  # Extract RGB channels
-alpha_channel = ucsb_array[:, :, 3]  # Extract the alpha channel
+rgb_image = ucsb_array[:, :, :3]  # extract RGB channels
+alpha_channel = ucsb_array[:, :, 3]  # extract the alpha channel
 
-# Apply Gaussian Blur to the RGB channels
-filtered_rgb = cv2.medianBlur(rgb_image, 7)
+# applying median blur
+filtered_rgb = cv2.medianBlur(rgb_image, 5)
 
-# Recombine the blurred RGB with the original alpha channel
+# applying gaussian blur
+filtered_rgb = cv2.GaussianBlur(filtered_rgb, (3, 3), 0)
+
+# recombine the blurred RGB with the original alpha channel
 filtered_ucsb = np.dstack((filtered_rgb, alpha_channel))
 
 final = Image.fromarray(filtered_ucsb)
