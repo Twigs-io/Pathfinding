@@ -1,1 +1,2 @@
-print("mel")
+for x in range(100):
+    print("mel")
